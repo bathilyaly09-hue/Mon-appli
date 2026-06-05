@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="ElecVision - Créez des plans électriques professionnels en 3D, générez des devis et recevez vos paiements par Orange Money ou Wave. Solution complète pour électriciens au Sénégal.">
+    <meta name="keywords" content="électricité, plan électrique, devis électricité, Orange Money, Wave, Sénégal, électricien, ElecVision">
+    <meta name="author" content="Aly Bathily">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ElecVision - Plans électriques professionnels">
+    <meta property="og:description" content="Créez vos plans électriques, devis et recevez vos paiements en ligne">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#667eea">
+    <title>ElecVision - Solutions électriques professionnelles</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23667eea'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3E⚡%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-bolt"></i>
+                <span>ElecVision</span>
+                <small>Slogant: ElectriPlan Pro</small>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#" class="nav-link" onclick="showSection('home')"><i class="fas fa-home"></i> Accueil</a>
+                <a href="#" class="nav-link" onclick="showSection('create')"><i class="fas fa-drafting-compass"></i> Créer Plan</a>
+                <a href="#" class="nav-link" onclick="showSection('projects')"><i class="fas fa-folder-open"></i> Mes Projets</a>
+                <a href="#" class="nav-link" onclick="showSection('payment')"><i class="fas fa-credit-card"></i> Paiement</a>
+                <a href="#" class="nav-link" onclick="showSection('help')"><i class="fas fa-question-circle"></i> Aide</a>
+            </div>
+            <div class="nav-user">
+                <i class="fas fa-user-circle"></i>
+                <span>Électricien Pro</span>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Accueil -->
+    <div id="homeSection" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1><i class="fas fa-bolt"></i> ElecVision</h1>
+                <p>La solution professionnelle pour vos plans électriques, devis et paiements en ligne</p>
+                <div class="hero-buttons">
+                    <button class="btn-hero" onclick="showSection('create')">
+                        <i class="fas fa-plus-circle"></i> Créer un plan
+                    </button>
+                    <button class="btn-hero-secondary" onclick="showSection('projects')">
+                        <i class="fas fa-folder-open"></i> Voir mes projets
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-cube"></i>
+                <h3>Plans 3D</h3>
+                <p>Visualisation en 3D de vos circuits électriques</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-calculator"></i>
+                <h3>Calculs automatiques</h3>
+                <p>Sections de câbles, chutes de tension, normes NFC 15-100</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-file-pdf"></i>
+                <h3>Devis professionnels</h3>
+                <p>Génération PDF avec logo et détails complets</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile friendly</h3>
+                <p>Utilisable sur tablette et smartphone</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-credit-card"></i>
+                <h3>Paiement intégré</h3>
+                <p>Orange Money & Wave</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Sauvegarde cloud</h3>
+                <p>Vos projets toujours accessibles</p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Projets réalisés</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">Satisfaction client</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Support disponible</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Création de plan -->
+    <div id="createSection" class="section">
+        <div class="toolbar">
+            <div class="tool-group">
+                <button class="btn-icon" onclick="document.getElementById('uploadPlan').click()" title="Importer un plan">
+                    <i class="fas fa-file-import"></i> Importer
+                </button>
+                <button class="btn-icon" onclick="exportToPDF()" title="Générer devis">
+                    <i class="fas fa-file-pdf"></i> Devis PDF
+                </button>
+                <button class="btn-icon" onclick="saveProject()" title="Sauvegarder">
+                    <i class="fas fa-save"></i> Sauvegarder
+                </button>
+                <button class="btn-icon" onclick="loadProjectList()" title="Charger projet">
+                    <i class="fas fa-folder-open"></i> Charger
+                </button>
+                <button class="btn-icon" onclick="clearCanvas()" title="Nouveau projet">
+                    <i class="fas fa-plus"></i> Nouveau
+                </button>
+                <button class="btn-icon" onclick="toggle3DView()" title="Vue 3D">
+                    <i class="fas fa-cube"></i> Vue 3D
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <span class="tool-label"><i class="fas fa-icons"></i> Symboles:</span>
+                <button class="btn-symbol" onclick="addSymbol('prise')" title="Prise électrique">
+                    <i class="fas fa-plug"></i>
+                </button>
+                <button class="btn-symbol" onclick="addSymbol('interrupteur')" title="Interrupteur">
+                    <i class="fas fa-lightbulb"></i>
+                </button>
+                <button class="btn-symbol" onclick="addSymbol('lampe')" title="Lampe">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="btn-symbol" onclick="addSymbol('tableau')" title="Tableau électrique">
+                    <i class="fas fa-charging-station"></i>
+                </button>
+                <button class="btn-symbol" onclick="addSymbol('chauffe-eau')" title="Chauffe-eau">
+                    <i class="fas fa-hot-tub"></i>
+                </button>
+                <button class="btn-symbol" onclick="addSymbol('clim')" title="Climatiseur">
+                    <i class="fas fa-snowflake"></i>
+                </button>
+                <button class="btn-symbol" onclick="addSymbol('ventilateur')" title="Ventilateur">
+                    <i class="fas fa-fan"></i>
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <button class="btn-symbol" id="drawWireBtn" onclick="activateWireMode()" title="Tracer câble">
+                    <i class="fas fa-draw-polygon"></i> Câble
+                </button>
+                <button class="btn-symbol" onclick="activateSelectMode()" title="Sélectionner">
+                    <i class="fas fa-mouse-pointer"></i>
+                </button>
+                <button class="btn-symbol" onclick="deleteSelected()" title="Supprimer">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <div class="tool-group">
+                <label><i class="fas fa-ruler"></i> Échelle: 1cm = </label>
+                <input type="number" id="scale" value="10" step="1" style="width:70px">
+                <span>px</span>
+                <button class="btn-small" onclick="calibrateScale()">Étalonner</button>
+            </div>
+        </div>
+
+        <div class="workspace">
+            <div class="canvas-container">
+                <canvas id="canvas" width="1200" height="800"></canvas>
+            </div>
+            
+            <div class="info-panel">
+                <div class="info-section">
+                    <h3><i class="fas fa-calculator"></i> Calculs automatiques</h3>
+                    <div class="info-grid">
+                        <div>📏 Câbles:</div>
+                        <div id="totalLength">0 m</div>
+                        <div>🔌 Section (prises):</div>
+                        <div id="wireSection">2.5 mm²</div>
+                        <div>💡 Section (éclairage):</div>
+                        <div id="lightSection">1.5 mm²</div>
+                        <div>⚡ Disjoncteur:</div>
+                        <div id="breakerSize">40 A</div>
+                        <div>📉 Chute tension:</div>
+                        <div id="voltageDrop">0.5%</div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h3><i class="fas fa-chart-line"></i> Estimation (FCFA)</h3>
+                    <div class="info-grid">
+                        <div>Câbles:</div>
+                        <div id="cableCost">0 FCFA</div>
+                        <div>Matériel:</div>
+                        <div id="materialCost">0 FCFA</div>
+                        <div>Main d'œuvre:</div>
+                        <div id="laborCost">0 FCFA</div>
+                        <div class="total">💰 Total:</div>
+                        <div class="total" id="totalCost">0 FCFA</div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3><i class="fas fa-clipboard-list"></i> Liste matériel</h3>
+                    <div id="materialList" class="material-list">
+                        <p>Aucun matériel ajouté</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vue 3D (cachée par défaut) -->
+        <div id="view3D" class="view3d-container" style="display:none;">
+            <div class="view3d-header">
+                <h3><i class="fas fa-cube"></i> Visualisation 3D</h3>
+                <button class="btn-close" onclick="toggle3DView()">✖</button>
+            </div>
+            <div id="threeCanvas"></div>
+        </div>
+
+        <input type="file" id="uploadPlan" accept="image/*" style="display:none">
+    </div>
+
+    <!-- Section Mes Projets -->
+    <div id="projectsSection" class="section">
+        <h2><i class="fas fa-folder-open"></i> Mes Projets</h2>
+        <div id="projectsList" class="projects-grid">
+            <!-- Les projets seront chargés dynamiquement -->
+        </div>
+    </div>
+
+    <!-- Section Paiement -->
+    <div id="paymentSection" class="section">
+        <h2><i class="fas fa-credit-card"></i> Paiement sécurisé</h2>
+        <div class="payment-container">
+            <div class="payment-methods">
+                <div class="payment-method" onclick="selectPayment('orange')">
+                    <i class="fas fa-mobile-alt"></i>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Orange_logo.svg/120px-Orange_logo.svg.png" alt="Orange Money" style="height:40px">
+                    <h3>Orange Money</h3>
+                    <p>Paiement rapide et sécurisé</p>
+                </div>
+                <div class="payment-method" onclick="selectPayment('wave')">
+                    <i class="fas fa-waveform"></i>
+                    <h3>Wave</h3>
+                    <p>Transactions instantanées</p>
+                </div>
+            </div>
+
+            <div id="paymentForm" class="payment-form" style="display:none;">
+                <h3>Effectuer le paiement</h3>
+                <div class="form-group">
+                    <label>Numéro de téléphone:</label>
+                    <input type="tel" id="phoneNumber" placeholder="77 XXX XX XX" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Montant (FCFA):</label>
+                    <input type="number" id="amount" placeholder="0" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label>Référence projet:</label>
+                    <input type="text" id="projectRef" placeholder="PROJ-XXX" class="form-input">
+                </div>
+                <button class="btn-pay" onclick="processPayment()">
+                    <i class="fas fa-check-circle"></i> Payer maintenant
+                </button>
+                <p class="payment-info">
+                    <i class="fas fa-lock"></i> Transaction sécurisée - Numéro marchand: +221781255060
+                </p>
+            </div>
+
+            <div id="paymentConfirmation" class="payment-confirmation" style="display:none;">
+                <i class="fas fa-check-circle"></i>
+                <h3>Paiement initié !</h3>
+                <p>Vous allez recevoir une notification sur votre téléphone.</p>
+                <p>Code transaction: <span id="transactionId"></span></p>
+                <button onclick="checkPaymentStatus()">Vérifier le statut</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Aide -->
+    <div id="helpSection" class="section">
+        <h2><i class="fas fa-question-circle"></i> Centre d'aide</h2>
+        <div class="help-content">
+            <div class="help-card">
+                <i class="fas fa-play-circle"></i>
+                <h3>Comment créer un plan ?</h3>
+                <p>1. Importez le plan de votre client<br>2. Ajoutez les symboles électriques<br>3. Tracez les câbles<br>4. Générez le devis PDF</p>
+            </div>
+            <div class="help-card">
+                <i class="fas fa-credit-card"></i>
+                <h3>Comment payer ?</h3>
+                <p>Utilisez Orange Money ou Wave. Le paiement est sécurisé et instantané.</p>
+            </div>
+            <div class="help-card">
+                <i class="fas fa-headset"></i>
+                <h3>Support technique</h3>
+                <p>Email: support@elecvision.sn<br>Tél: +221 78 125 50 60<br>WhatsApp: +221 78 125 50 60</p>
+            </div>
+            <div class="help-card">
+                <i class="fas fa-file-alt"></i>
+                <h3>Normes NFC 15-100</h3>
+                <p>Notre application respecte automatiquement les normes électriques en vigueur.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4><i class="fas fa-bolt"></i> ElecVision</h4>
+                <p>Solution professionnelle pour électriciens</p>
+                <p>Slogant: ElectriPlan Pro</p>
+                <p>© 2024 - Tous droits réservés</p>
+                <p>Propriétaire: Aly Bathily</p>
+            </div>
+            <div class="footer-section">
+                <h4>Liens rapides</h4>
+                <a href="#" onclick="showSection('home')">Accueil</a>
+                <a href="#" onclick="showSection('create')">Créer un plan</a>
+                <a href="#" onclick="showSection('payment')">Paiement</a>
+                <a href="#" onclick="showSection('help')">Aide</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-phone"></i> +221 78 125 50 60</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp: +221 78 125 50 60</p>
+                <p><i class="fas fa-envelope"></i> aly.bathily@elecvision.sn</p>
+            </div>
+            <div class="footer-section">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Dernière mise à jour: Décembre 2024 | Version 2.0</p>
+        </div>
+    </footer>
+
+    <!-- Modal Politique de confidentialité -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2><i class="fas fa-shield-alt"></i> Politique de confidentialité</h2>
+            <div class="privacy-text">
+                <h3>1. Collecte des informations</h3>
+                <p>Nous collectons les informations que vous nous fournissez directement, notamment vos projets électriques, vos coordonnées et vos transactions de paiement.</p>
+                
+                <h3>2. Utilisation des données</h3>
+                <p>Vos données sont utilisées uniquement pour :<br>
+                - Créer et sauvegarder vos plans électriques<br>
+                - Traiter vos paiements via Orange Money et Wave<br>
+                - Améliorer nos services</p>
+                
+                <h3>3. Sécurité</h3>
+                <p>Nous utilisons le chiffrement SSL/TLS pour protéger vos données. Les paiements sont traités par les plateformes sécurisées Orange Money et Wave.</p>
+                
+                <h3>4. Partage des données</h3>
+                <p>Nous ne partageons jamais vos données personnelles avec des tiers sans votre consentement explicite.</p>
+                
+                <h3>5. Vos droits</h3>
+                <p>Vous avez le droit d'accéder, modifier ou supprimer vos données à tout moment en nous contactant.</p>
+                
+                <h3>6. Contact</h3>
+                <p>Pour toute question: aly.bathily@elecvision.sn ou +221 78 125 50 60</p>
+                
+                <p class="privacy-date">Dernière révision: 1er Décembre 2024</p>
+            </div>
+            <button onclick="closeModal()" class="btn-primary">J'accepte</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Afficher la politique de confidentialité au premier chargement
+        if(!localStorage.getItem('privacyAccepted')) {
+            document.getElementById('privacyModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+            localStorage.setItem('privacyAccepted', 'true');
+        }
+        
+        // Menu mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

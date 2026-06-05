@@ -1,0 +1,12 @@
+ElecVision/
+├── index.html
+├── style.css
+├── app.js
+├── backend.php
+├── config.php
+├── .htaccess
+├── install.php
+├── uploads/
+├── projets/
+├── logs/
+└── backups/
