@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ElecVision — outil local de conception de plans électriques et d'estimation de devis.">
+  <meta name="theme-color" content="#4338ca">
+  <title>ElecVision — Plans et devis électriques</title>
+  <link rel="stylesheet" href="app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="ElecVision, accueil"><span aria-hidden="true">⚡</span> ElecVision</a>
+    <nav aria-label="Navigation principale">
+      <a href="#home">Accueil</a><a href="#planner">Mon plan</a><a href="#projects">Mes projets</a>
+    </nav>
+    <div class="account"><span id="accountStatus">Mode local</span><button id="authOpen" class="button secondary">Connexion</button><button id="logout" class="button secondary hidden">Déconnexion</button></div>
+  </header>
+  <main>
+    <section id="home" class="hero">
+      <div><p class="eyebrow">Conception électrique simplifiée</p><h1>Du plan au devis,<br>sans perdre le fil.</h1><p>Positionnez vos équipements, tracez les circuits et obtenez une estimation indicative de votre projet.</p><a class="button" href="#planner">Créer un plan</a></div>
+      <div class="hero-card"><span class="hero-icon">⌁</span><strong>ElecVision</strong><span>Plans · matériel · estimation</span></div>
+    </section>
+    <section id="planner" class="section">
+      <div class="section-heading"><div><p class="eyebrow">Espace de travail</p><h2>Plan électrique</h2></div><div class="actions"><button id="newProject" class="button secondary">Nouveau</button><button id="saveProject" class="button">Enregistrer</button><button id="exportQuote" class="button secondary">Imprimer le devis</button></div></div>
+      <div class="toolbar">
+        <label class="button secondary upload">Importer un plan<input id="planImage" type="file" accept="image/*" hidden></label>
+        <button class="tool" data-symbol="prise">＋ Prise</button><button class="tool" data-symbol="interrupteur">＋ Interrupteur</button><button class="tool" data-symbol="lampe">＋ Éclairage</button><button class="tool" data-symbol="tableau">＋ Tableau</button><button class="tool" data-symbol="chauffe-eau">＋ Chauffe-eau</button><button class="tool" data-symbol="clim">＋ Climatisation</button>
+        <button id="wireMode" class="tool">Tracer un câble</button><button id="selectMode" class="tool">Sélectionner</button><button id="deleteSelected" class="tool danger">Supprimer sélection</button>
+        <label class="scale">Échelle <input id="scale" type="number" min="1" value="10"> px/cm</label>
+      </div>
+      <div class="workspace"><div class="canvas-wrap"><canvas id="canvas" width="1000" height="650" aria-label="Plan électrique éditable"></canvas></div>
+        <aside class="summary"><h3>Estimation indicative</h3><dl><dt>Longueur de câble</dt><dd id="totalLength">0 m</dd><dt>Section indicative prises</dt><dd id="wireSection">2,5 mm²</dd><dt>Section indicative éclairage</dt><dd>1,5 mm²</dd><dt>Protection estimée</dt><dd id="breakerSize">20 A</dd><dt>Câbles</dt><dd id="cableCost">0 FCFA</dd><dt>Matériel</dt><dd id="materialCost">0 FCFA</dd><dt>Main-d'œuvre</dt><dd id="laborCost">0 FCFA</dd></dl><div class="total"><span>Total estimatif</span><strong id="totalCost">0 FCFA</strong></div><p class="notice">Estimation indicative uniquement : faites valider les sections, protections et conformité par un électricien qualifié selon les normes locales.</p><h3>Matériel</h3><ul id="materials"><li>Aucun équipement ajouté.</li></ul></aside>
+      </div>
+    </section>
+    <section id="projects" class="section"><div class="section-heading"><div><p class="eyebrow">Sauvegardes</p><h2>Mes projets</h2></div><button id="refreshProjects" class="button secondary">Actualiser</button></div><p id="projectMessage" class="muted">Connectez-vous pour synchroniser vos projets sur ce serveur. Sans compte, le projet reste dans ce navigateur.</p><div id="projectList" class="project-list"></div></section>
+    <section class="section payment-note"><h2>Paiements</h2><p>Le paiement en ligne n’est pas activé dans cette version. Aucune transaction réelle n’est initiée. Une intégration Orange Money ou Wave nécessite un compte marchand, des identifiants API et une configuration serveur côté prestataire.</p></section>
+  </main>
+  <footer><span>ElecVision · Outil de préparation de plans et devis</span><span>Les calculs ne remplacent pas une étude professionnelle.</span></footer>
+  <dialog id="authDialog"><form id="authForm" method="dialog"><button type="button" id="authClose" class="dialog-close" aria-label="Fermer">×</button><p class="eyebrow">Compte sécurisé</p><h2 id="authTitle">Connexion</h2><label>Adresse e-mail<input id="authEmail" type="email" autocomplete="email" required maxlength="190"></label><label>Mot de passe<input id="authPassword" type="password" autocomplete="current-password" required minlength="10" maxlength="200"></label><p class="muted">Utilisez au moins 10 caractères. Les projets synchronisés sont associés à votre compte.</p><button class="button" id="authSubmit" type="submit">Se connecter</button><button class="text-button" id="authToggle" type="button">Créer un compte</button><p id="authError" class="error" role="alert"></p></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

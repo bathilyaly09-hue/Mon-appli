@@ -1,0 +1,6 @@
+# Runtime database and private user data
+/storage/*
+!/storage/.htaccess
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
